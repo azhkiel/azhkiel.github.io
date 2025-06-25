@@ -27,32 +27,43 @@
         
         .project-card:hover { transform: translateY(-5px); transition: all 0.3s ease; }
         .text-gradient { background: linear-gradient(135deg, #000000, #4a4a4a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-         @keyframes scroll {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
+        /* Infinite scroll animation - left to right */
+        @keyframes marquee-left {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-100%); }
         }
         
-        .animate-scroll {
-            animation: scroll 30s linear infinite;
+        /* Infinite scroll animation - right to left */
+        @keyframes marquee-right {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(0%); }
         }
         
-        .logo-container:hover .animate-scroll {
+        .marquee-left {
+            animation: marquee-left 30s linear infinite;
+        }
+        
+        .marquee-right {
+            animation: marquee-right 30s linear infinite;
+        }
+        
+        /* Pause animation on hover */
+        .logo-container:hover .marquee-left,
+        .logo-container:hover .marquee-right {
             animation-play-state: paused;
         }
         
         /* Custom grayscale filter */
-        .logo-grayscale {
-            filter: grayscale(100%) brightness(0.8);
-            transition: filter 0.3s ease;
+        .logo-item {
+            filter: grayscale(100%);
+            transition: all 0.3s ease-in-out;
         }
         
-        .logo-grayscale:hover {
-            filter: grayscale(0%) brightness(1);
+        .logo-item:hover {
+            filter: grayscale(0%);
+            transform: scale(1.2);
         }
+
     </style>
 </head>
 <body class="bg-white text-black">
@@ -106,7 +117,7 @@
             </div>
             <div class="scale-in" style="animation-delay: 0.6s;">
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button onclick="window.open('https://onedrive.live.com/personal/7f8d5b410a14f141/_layouts/15/Doc.aspx?sourcedoc=%7B817018ee-c030-472c-bb6e-618384e9ccf5%7D&action=default&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3cvYy83ZjhkNWI0MTBhMTRmMTQxL0VlNFljSUV3d0N4SHUyNWhnNFRwelBVQnlDdnlYMy03ZlNIQkJOb2t6RzZRZUE_ZT1xc3V5Tjg&slrid=8b73aba1-c0c1-9000-5606-2bb973674de4&originalPath=aHR0cHM6Ly8xZHJ2Lm1zL3cvYy83ZjhkNWI0MTBhMTRmMTQxL0VlNFljSUV3d0N4SHUyNWhnNFRwelBVQnlDdnlYMy03ZlNIQkJOb2t6RzZRZUE_cnRpbWU9NTRpOUdaV3ozVWc&CID=2757f40c-c93c-4e4e-8320-f0a2edd86e40&_SRM=0:G:92')" class="bg-black text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors font-medium">
+                    <button onclick="window.open('https://1drv.ms/w/c/7f8d5b410a14f141/Ee4YcIEwwCxHu25hg4TpzPUByCvyX3-7fSHBBNokzG6QeA?e=8sQoCD ')" class="bg-black text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors font-medium">
                         Lihat CV
                     </button>
                     <a href="#contact" class="border-2 border-black text-black px-8 py-3 rounded-lg hover:bg-black hover:text-white transition-colors font-medium">
@@ -298,208 +309,98 @@
     </section>
     
     <div class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
-     <section class="w-full max-w-7xl mx-auto" x-data="skillsCarousel()">
-        <!-- Header -->
-        <div class="text-center mb-12">
-            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                Tech Stack & Skills
-            </h2>
-            <p class="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto">
-                Technologies and tools I work with to bring ideas to life
-            </p>
-        </div>
-
-        <!-- Logo Carousel Container -->
-        <div class="logo-container relative overflow-hidden bg-white rounded-2xl shadow-lg border border-gray-200 py-8">
-            <!-- Gradient Overlays -->
-            <div class="absolute left-0 top-0 w-20 h-full bg-gradient-to-r from-white to-transparent z-10"></div>
-            <div class="absolute right-0 top-0 w-20 h-full bg-gradient-to-l from-white to-transparent z-10"></div>
+        <div class="w-full max-w-6xl mx-auto">
+            <!-- Skills Section -->
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">My Skills</h2>
+                <p class="text-gray-600">Technologies and tools I work with</p>
+            </div>
             
-            <!-- Scrolling Logo Track -->
-            <div class="flex animate-scroll" style="width: 200%;">
-                <!-- First Set of Logos -->
-                <div class="flex items-center justify-around min-w-full px-4">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" 
-                         alt="Python" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" 
-                         alt="HTML5" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" 
-                         alt="CSS3" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" 
-                         alt="JavaScript" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg" 
-                         alt="Laravel" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/alpinejs/alpinejs-original.svg" 
-                         alt="Alpine.js" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" 
-                         alt="Tailwind CSS" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" 
-                         alt="C++" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" 
-                         alt="Arduino" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=64&h=64&fit=crop&crop=center" 
-                         alt="ESP32" 
-                         class="w-12 h-12 md:w-16 md:h-16 rounded-lg logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" 
-                         alt="Figma" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg" 
-                         alt="Canva" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" 
-                         alt="GitHub" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" 
-                         alt="Flutter" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" 
-                         alt="Dart" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" 
-                         alt="VS Code" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" 
-                         alt="Android Studio" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg" 
-                         alt="Visual Studio" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" 
-                         alt="Terminal" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=64&h=64&fit=crop&crop=center" 
-                         alt="Microsoft Office" 
-                         class="w-12 h-12 md:w-16 md:h-16 rounded-lg logo-grayscale">
-                    
-                    <img src="https://images.unsplash.com/photo-1614624532983-4ce03382d63d?w=64&h=64&fit=crop&crop=center" 
-                         alt="Livewire" 
-                         class="w-12 h-12 md:w-16 md:h-16 rounded-lg logo-grayscale">
+            <!-- Logo Container -->
+            <div class="logo-container relative overflow-hidden bg-white rounded-2xl shadow-lg border border-gray-200 py-8 space-y-6">
+                <!-- Desktop Infinite Scroll - Row 1 (Left to Right) -->
+                <div class="hidden md:block">
+                    <div class="flex space-x-8 marquee-left">
+                        <!-- First set of logos -->
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg" alt="Laravel" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://alpinejs.dev/alpine_long.svg" alt="Alpine.js" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" alt="Tailwind CSS" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://laravel-livewire.com/img/logo.svg" alt="Livewire" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" alt="Arduino" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=64&h=64&fit=crop&crop=center" alt="ESP32" class="logo-item w-16 h-16 object-contain flex-shrink-0 rounded-lg">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg" alt="Canva" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" alt="Android Studio" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg" alt="Visual Studio" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" alt="Terminal" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=64&h=64&fit=crop&crop=center" alt="Microsoft Office" class="logo-item w-16 h-16 object-contain flex-shrink-0 rounded-lg">
+                    </div>
                 </div>
+                
+                <!-- Desktop Infinite Scroll - Row 2 (Right to Left) -->
+                <div class="hidden md:block">
+                    <div class="flex space-x-8 marquee-right">
+                        <!-- Second set of logos -->
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg" alt="Laravel" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://alpinejs.dev/alpine_long.svg" alt="Alpine.js" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" alt="Tailwind CSS" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://laravel-livewire.com/img/logo.svg" alt="Livewire" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" alt="Arduino" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=64&h=64&fit=crop&crop=center" alt="ESP32" class="logo-item w-16 h-16 object-contain flex-shrink-0 rounded-lg">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg" alt="Canva" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" alt="Android Studio" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg" alt="Visual Studio" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" alt="Terminal" class="logo-item w-16 h-16 object-contain flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=64&h=64&fit=crop&crop=center" alt="Microsoft Office" class="logo-item w-16 h-16 object-contain flex-shrink-0 rounded-lg">
 
-                <!-- Duplicate Set for Seamless Loop -->
-                <div class="flex items-center justify-around min-w-full px-4">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" 
-                         alt="Python" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" 
-                         alt="HTML5" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" 
-                         alt="CSS3" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" 
-                         alt="JavaScript" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.worldvectorlogo.com/logos/laravel-2.svg" 
-                         alt="Laravel" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/alpinejs/alpinejs-original.svg" 
-                         alt="Alpine.js" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" 
-                         alt="Tailwind CSS" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" 
-                         alt="C++" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" 
-                         alt="Arduino" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=64&h=64&fit=crop&crop=center" 
-                         alt="ESP32" 
-                         class="w-12 h-12 md:w-16 md:h-16 rounded-lg logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" 
-                         alt="Figma" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg" 
-                         alt="Canva" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" 
-                         alt="GitHub" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" 
-                         alt="Flutter" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" 
-                         alt="Dart" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" 
-                         alt="VS Code" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" 
-                         alt="Android Studio" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg" 
-                         alt="Visual Studio" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" 
-                         alt="Terminal" 
-                         class="w-12 h-12 md:w-16 md:h-16 logo-grayscale">
-                    
-                    <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=64&h=64&fit=crop&crop=center" 
-                         alt="Microsoft Office" 
-                         class="w-12 h-12 md:w-16 md:h-16 rounded-lg logo-grayscale">
-                    
-                    <img src="https://images.unsplash.com/photo-1614624532983-4ce03382d63d?w=64&h=64&fit=crop&crop=center" 
-                         alt="Livewire" 
-                         class="w-12 h-12 md:w-16 md:h-16 rounded-lg logo-grayscale">
+                    </div>
+                </div>
+                
+                <!-- Mobile Responsive Grid -->
+                <div class="md:hidden grid grid-cols-4 sm:grid-cols-6 gap-6 px-4">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="logo-item w-12 h-12 object-contain mx-auto">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" class="logo-item w-12 h-12 object-contain mx-auto">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" class="logo-item w-12 h-12 object-contain mx-auto">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="logo-item w-12 h-12 object-contain mx-auto">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg" alt="Laravel" class="logo-item w-12 h-12 object-contain mx-auto">
+                    <img src="https://alpinejs.dev/alpine_long.svg" alt="Alpine.js" class="logo-item w-12 h-12 object-contain mx-auto">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" alt="Tailwind CSS" class="logo-item w-12 h-12 object-contain mx-auto">
+                    <img src="https://laravel-livewire.com/img/logo.svg" alt="Livewire" class="logo-item w-12 h-12 object-contain mx-auto">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" class="logo-item w-12 h-12 object-contain mx-auto">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" alt="Arduino" class="logo-item w-12 h-12 object-contain mx-auto">
+                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=64&h=64&fit=crop&crop=center" alt="ESP32" class="logo-item w-12 h-12 object-contain mx-auto rounded-lg">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" class="logo-item w-12 h-12 object-contain mx-auto">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg" alt="Canva" class="logo-item w-12 h-12 object-contain mx-auto">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="logo-item w-12 h-12 object-contain mx-auto">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter" class="logo-item w-12 h-12 object-contain mx-auto">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart" class="logo-item w-12 h-12 object-contain mx-auto">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" class="logo-item w-12 h-12 object-contain mx-auto">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" alt="Android Studio" class="logo-item w-12 h-12 object-contain mx-auto">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg" alt="Visual Studio" class="logo-item w-12 h-12 object-contain mx-auto">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" alt="Terminal" class="logo-item w-12 h-12 object-contain mx-auto">
+                    <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=64&h=64&fit=crop&crop=center" alt="Microsoft Office" class="logo-item w-12 h-12 object-contain mx-auto rounded-lg">
                 </div>
             </div>
         </div>
-
-        <!-- Footer Text -->
-        <div class="text-center mt-8">
-            <p class="text-gray-500 text-sm md:text-base">
-                Hover over any logo to see it in full color
-            </p>
-        </div>
-    </section>
     </div>
 
     <!-- Contact Section -->
